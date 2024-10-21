@@ -1,43 +1,36 @@
 import React from "react";
-import { Card, CardHeader, CardTitle, CardContent, Table, TableHead, TableRow, TableCell } from "../src/components/ui/card";
-
-const applications = [
-  { name: "John Doe", email: "john@example.com", gpa: 3.8, year: "3rd", rollNumber: "202001" },
-  { name: "Jane Smith", email: "jane@example.com", gpa: 3.6, year: "2nd", rollNumber: "202002" },
-];
 
 function AdminDashboard() {
+  const studentApplications = [
+    { name: "John Doe", email: "john@example.com", gpa: 3.8, year: "3rd", rollNumber: "202001" },
+    { name: "Jane Smith", email: "jane@example.com", gpa: 3.6, year: "2nd", rollNumber: "202002" },
+  ];
+
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <Card className="w-full max-w-2xl p-6 shadow-xl">
-        <CardHeader>
-          <CardTitle className="text-center">Admin Dashboard</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <thead>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>GPA</TableHead>
-                <TableHead>Year</TableHead>
-                <TableHead>Roll Number</TableHead>
-              </TableRow>
-            </thead>
-            <tbody>
-              {applications.map((app, index) => (
-                <TableRow key={index}>
-                  <TableCell>{app.name}</TableCell>
-                  <TableCell>{app.email}</TableCell>
-                  <TableCell>{app.gpa}</TableCell>
-                  <TableCell>{app.year}</TableCell>
-                  <TableCell>{app.rollNumber}</TableCell>
-                </TableRow>
+    <div className="p-6 shadow-lg max-w-2xl w-full mx-auto bg-white rounded-lg">
+      <h2 className="text-2xl font-bold mb-4 text-center text-gray-700">Admin Dashboard</h2>
+      <table className="w-full table-auto border-collapse border border-gray-300">
+        <thead>
+          <tr>
+            {["Name", "Email", "GPA", "Year", "Roll Number"].map((heading) => (
+              <th key={heading} className="border p-2 bg-gray-100">
+                {heading}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {studentApplications.map((student, index) => (
+            <tr key={index} className="border-t">
+              {Object.values(student).map((value, i) => (
+                <td key={i} className="border p-2 text-center">
+                  {value}
+                </td>
               ))}
-            </tbody>
-          </Table>
-        </CardContent>
-      </Card>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

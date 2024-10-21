@@ -1,42 +1,39 @@
 import React, { useState } from "react";
-import StudentDashboard from "./StudentForm";
+import StudentForm from "./StudentForm";
 import AdminDashboard from "./AdminDashboard";
-import { Card, CardHeader, CardTitle, CardContent, Button } from "../src/components/ui/card";
 
 function App() {
   const [role, setRole] = useState(null);
 
-  const handleLogin = (userRole) => {
-    setRole(userRole);
-  };
+  const handleLogin = (userRole) => setRole(userRole);
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      {!role ? (
-        <Card className="w-96 shadow-xl">
-          <CardHeader>
-            <CardTitle className="text-center">Scholarship Portal</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Button
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+    <div className="flex items-center justify-center h-screen bg-gray-50">
+      <div className="w-full max-w-lg p-8 shadow-lg rounded-lg bg-white">
+        {!role ? (
+          <div className="flex flex-col gap-6">
+            <h1 className="text-3xl font-bold text-center text-gray-700">
+              Scholarship Portal
+            </h1>
+            <button
               onClick={() => handleLogin("student")}
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
               Login as Student
-            </Button>
-            <Button
-              className="w-full bg-green-600 hover:bg-green-700 text-white"
+            </button>
+            <button
               onClick={() => handleLogin("admin")}
+              className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700"
             >
               Login as Admin
-            </Button>
-          </CardContent>
-        </Card>
-      ) : role === "student" ? (
-        <StudentDashboard />
-      ) : (
-        <AdminDashboard />
-      )}
+            </button>
+          </div>
+        ) : role === "student" ? (
+          <StudentForm />
+        ) : (
+          <AdminDashboard />
+        )}
+      </div>
     </div>
   );
 }
